@@ -16,10 +16,12 @@
     />
   </section>
   <h2>{{ status }}</h2>
-  <button @click="restartGame" class="restart">
-    <img src="./public/images/restart.svg" alt="Restart Game" />Start The
-    Fooking Game
-  </button>
+  <div class="button">
+    <button @click="restartGame" class="restart">
+      <img src="./public/images/restart.svg" alt="Restart Game" />Restart Game
+    </button>
+    <button @click="restartGame" class="restart">Start The Fooking Game</button>
+  </div>
 </template>
 
 <script>
@@ -182,6 +184,7 @@ body {
 }
 
 .restart {
+  display: flex;
   background-color: orange;
   color: white;
   padding: 0.75rem 0.5rem;
@@ -190,5 +193,9 @@ body {
   justify-content: center;
   margin: auto;
   font-weight: bold;
+}
+
+.button {
+  display: flex;
 }
 </style>
