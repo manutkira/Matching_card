@@ -1,7 +1,7 @@
 <template>
   <div class="card" :class="flippedStyles" @click="selectCard">
     <div class="card-face is-front">
-      <img :src="`./public/images/${value}.png`" :alt="value" />
+      <img :src="`./images/${value}.png`" :alt="value" />
       <img
         src="./public/images/checkmark.svg"
         v-if="matched"
