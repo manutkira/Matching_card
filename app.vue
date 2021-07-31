@@ -1,5 +1,9 @@
 <template>
-  <h1>peek-a-vue</h1>
+  <img
+    src="./public/images/peek-a-vue-title.png"
+    alt="peak-a-vue"
+    class="title"
+  />
   <section class="game-board">
     <card
       v-for="(card, index) in cardList"
@@ -12,7 +16,10 @@
     />
   </section>
   <h2>{{ status }}</h2>
-  <button @click="restartGame">Restart Game</button>
+  <button @click="restartGame" class="restart">
+    <img src="./public/images/restart.svg" alt="Restart Game" />Start The
+    Fooking Game
+  </button>
 </template>
 
 <script>
@@ -56,7 +63,16 @@ export default {
       });
     };
 
-    const cardItems = [1, 2, 3, 4, 5, 6, 7, 8];
+    const cardItems = [
+      "bat",
+      "candy",
+      "cauldron",
+      "cupcake",
+      "ghost",
+      "pumpkin",
+      "witch-hat",
+      "moon",
+    ];
 
     cardItems.forEach((item) => {
       cardList.value.push({
@@ -84,7 +100,14 @@ export default {
       cardList.value[payload.position].visible = true;
 
       if (userSelection.value[0]) {
-        userSelection.value[1] = payload;
+        if (
+          userSelection.value[0].position === payload.position &&
+          userSelection.value[0].faceValue === payload.faceValue
+        ) {
+          return;
+        } else {
+          userSelection.value[1] = payload;
+        }
       } else {
         userSelection.value[0] = payload;
       }
@@ -101,8 +124,10 @@ export default {
             cardList.value[card1.position].matched = true;
             cardList.value[card2.position].matched = true;
           } else {
-            cardList.value[card1.position].visible = false;
-            cardList.value[card2.position].visible = false;
+            setTimeout(() => {
+              cardList.value[card1.position].visible = false;
+              cardList.value[card2.position].visible = false;
+            }, 700);
           }
 
           userSelection.value.length = 0;
@@ -126,25 +151,44 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: Arial, Helvetica, sans-serif;
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #f5f5f5;
+  background-image: url("./public/images/page-bg.png");
+  background-color: #00070c;
+  height: 100vh;
+  padding-top: 60px;
 }
 
-.card {
-  border: 5px solid #ccc;
+.title {
+  padding-bottom: 30px;
 }
 
 .game-board {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px 100px;
+  grid-template-columns: 120px 120px 120px 120px;
+  grid-template-rows: 120px 120px 120px 120px;
   grid-column-gap: 30px;
   grid-row-gap: 30px;
   justify-content: center;
+}
+
+.restart {
+  background-color: orange;
+  color: white;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-weight: bold;
 }
 </style>
