@@ -4,17 +4,17 @@
     alt="peak-a-vue"
     class="title"
   />
-  <section class="game-board">
+  <transition-group tag="section" class="game-board" name="shuffle-card">
     <card
-      v-for="(card, index) in cardList"
-      :key="`card-${index}`"
+      v-for="card in cardList"
+      :key="`${card.value}-${card.variant}`"
       :value="card.value"
       :visible="card.visible"
       :position="card.position"
       :matched="card.matched"
       @select-card="flipcard"
     />
-  </section>
+  </transition-group>
   <h2>{{ status }}</h2>
   <div class="button">
     <button @click="restartGame" class="restart">
@@ -79,12 +79,14 @@ export default {
     cardItems.forEach((item) => {
       cardList.value.push({
         matched: false,
+        variant: 1,
         value: item,
         position: null,
         visible: true,
       });
       cardList.value.push({
         matched: false,
+        variant: 2,
         value: item,
         position: null,
         visible: true,
@@ -197,5 +199,9 @@ body {
 
 .button {
   display: flex;
+}
+
+.shuffle-card-move {
+  transition: transform 0.8s ease-in;
 }
 </style>
