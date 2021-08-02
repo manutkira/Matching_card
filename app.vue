@@ -20,7 +20,7 @@
     <button @click="restartGame" class="restart">
       <img src="./public/images/restart.svg" alt="Restart Game" />Restart Game
     </button>
-    <button @click="restartGame" class="restart">Start The Fooking Game</button>
+    <button @click="restartGame" class="restart">Start</button>
   </div>
 </template>
 
